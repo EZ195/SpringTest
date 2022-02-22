@@ -14,4 +14,8 @@ public class SellerBO {
 	public Seller getLastSellerInfo() {
 		return sellerDAO.selectLastSellerInfo();				
 	}
+	
+	public int addSellerInfo(String nickname, String profileImageUrl, double temperature) {
+		return sellerDAO.addSellerInfo(nickname, profileImageUrl, temperature);
+	}
 }

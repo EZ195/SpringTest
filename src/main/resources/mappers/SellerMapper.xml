@@ -4,6 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.ezone.test.lesson04.dao.SellerDAO">
+
 	<select id="selectLastSellerInfo" resultType="com.ezone.test.lesson04.model.Seller">
 		
 		SELECT
@@ -19,4 +20,20 @@
 		LIMIT 1
 		
 	</select>
+	
+	<insert id="addSellerInfo" parameterType="map">
+		INSERT INTO 
+			`seller`
+			(`nickname`
+			,`profileImageUrl`
+			,`temperature`
+			,`createdAt`
+			,`updatedAt`)
+		VALUES
+			(#{nickname}
+			,#{profileImageUrl}
+			,#{temperature}
+			,now()
+			,now())
+	</insert>
 </mapper>
