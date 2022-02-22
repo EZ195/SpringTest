@@ -10,7 +10,7 @@
 	<h2>판매자 정보</h2>
 	<table>
 		<tr>
-			<td><img src="${result.profileImageUrl }" width="100" height="100" alt="프로필 이미지"></td>
+			<td><img src="${result.profileImageUrl }" width="100" alt="프로필 이미지"></td>
 		</tr>
 		<tr>
 			<td>${result.nickname }</td>

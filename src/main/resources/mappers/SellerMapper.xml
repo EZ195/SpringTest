@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper
-  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.ezone.test.lesson04.dao.SellerDAO">
 
-	<select id="selectLastSellerInfo" resultType="com.ezone.test.lesson04.model.Seller">
-		
+	<!-- id라는 파라미터가 없으면 가장 최근 판매자 출력 -->
+	<select id="selectLastSellerInfo" resultType="com.ezone.test.lesson04.model.Seller">	
 		SELECT
 			`id`
-			,`nickname`
-			,`profileImageUrl`
-			,`temperature`
-			,`createdAt`
-			,`updatedAt`
+			, `nickname`
+			, `profileImageUrl`
+			, `temperature`
+			, `createdAt`
+			, `updatedAt`
 		FROM
 			`seller`
 		ORDER BY `id` DESC
@@ -21,19 +21,41 @@
 		
 	</select>
 	
-	<insert id="addSellerInfo" parameterType="map">
-		INSERT INTO 
+	<!-- d라는 파라미터가 있으면 해당하는 정보 출력 -->
+	<select id="selectSeller" parameterType="int" resultType="com.ezone.test.lesson04.model.Seller">
+		
+		SELECT
+			`id`
+			, `nickname`
+			, `profileImageUrl`
+			, `temperature`
+			, `createdAt`
+			, `updatedAt`
+		FROM
 			`seller`
-			(`nickname`
-			,`profileImageUrl`
-			,`temperature`
-			,`createdAt`
-			,`updatedAt`)
-		VALUES
-			(#{nickname}
-			,#{profileImageUrl}
-			,#{temperature}
-			,now()
-			,now())
+		WHERE
+			`id` = #{id}
+			
+	
+	</select>
+	
+	<insert id="addSellerInfo" parameterType="map">
+		INSERT INTO `seller`
+			(
+				`nickname`
+				,`profileImageUrl`
+				,`temperature`
+				,`createdAt`
+				,`updatedAt`
+			)
+			
+		VALUE
+			(
+				#{nickname}
+				,#{profileImageUrl}
+				,#{temperature}
+				,now()
+				,now()
+			)
 	</insert>
 </mapper>
