@@ -15,7 +15,7 @@
 		<label>프로필 사진 url</label><br><input type="text" name="profileImageUrl"><br>
 		<label>온도</label><br><input type="text" name="temperature"><br>
 		
-		<button type="submit" value="추가"></button>
+		<button type="submit" value="추가">추가</button>
 	</form>
 	
 </body>
