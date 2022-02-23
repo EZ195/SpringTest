@@ -24,7 +24,7 @@ public class RealtorController {
 	}
 	
 	@PostMapping("/addRealtor")
-	public String addRealtor(@ModelAttribute Realtor realtor, Model model) {
+	public String addRealtor(@ModelAttribute Realtor realtor, Model model) { 
 		
 		int count = realtorBO.addRealtorInfo(realtor);
 		model.addAttribute("realtor", realtor);
