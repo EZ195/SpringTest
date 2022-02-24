@@ -9,20 +9,61 @@
 <title>JSTL Core 라이브러리 2</title>
 </head>
 <body>
-	<h1>HOT 5</h1>
 	
+	
+	<div class="container">
+	<h1>HOT 5</h1>
 		<table border="1" class="table table-striped">
-			<tr>
-				<td align=center>순위</td>
-				<td align=center>제목</td>
+			<tr align=center>
+				<td>순위</td>
+				<td>제목</td>
 			</tr>
 			<c:forEach var="music" items="${musicR }" varStatus="status">
-			<tr>
-				<td align=center>${status.count }</td>
-				<td align=center>${music }</td>
+			<tr align=center>
+				<td>${status.count }</td>
+				<td>${music }</td>
 			</tr>
 			</c:forEach>			
-		</table>			
-
+		</table>
+		<br><br>
+	</div>
+	<div class="container">
+	<h1>멤버십</h1>
+		
+		<table border="1" class="table">
+			<tr align="center">
+				<td>이름</td>
+				<td>전화번호</td>
+				<td>등급</td>
+				<td>포인트</td>
+			</tr>
+			<c:forEach var="members" items="${membership}">
+			<tr align="center">
+				
+				<td>${members.name }</td>
+				<td>${members.phoneNumber }</td>
+				<c:choose>
+				<c:when test="${members.grade eq 'VIP' }">
+					<td class="text-danger">${members.grade }</td>
+				</c:when>
+				<c:when test="${members.grade eq 'GOLD' }">
+					<td class="text-warning">${members.grade }</td>
+				</c:when>
+				<c:otherwise>
+					<td>${members.grade }</td>
+				</c:otherwise>
+				</c:choose>
+				<c:choose>
+				<c:when test="${members.point >= 5000 }">
+					<td class="text-primary">${members.point }p</td>			
+				</c:when>
+				<c:otherwise>
+					<td>${members.point }p</td>		
+				</c:otherwise>
+				</c:choose>
+			</tr>
+			</c:forEach>
+		</table>
+	</div>	
 </body>
 </html>
