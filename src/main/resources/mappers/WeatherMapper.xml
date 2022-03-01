@@ -15,4 +15,32 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM
 			`weatherhistory`
 	</select>
+	
+	<insert id="insertWeatherData">
+		INSERT INTO `weatherhistory`
+					(
+						`date`
+						,`weather`
+						,`temperatures`
+						,`precipitation`
+						,`microDust`
+						,`windSpeed`
+						,`createdAt`
+						,`updatedAt`
+					)
+		VALUE (
+				`#{date}`
+				,`#{weather}`
+				,`#{temperatures}`
+				,`#{precipitation}`
+				,`#{microDust}`
+				,`#{windSpeed}`
+				,now()
+				,now()
+		
+		
+				)
+					
+	
+	</insert>
 </mapper>

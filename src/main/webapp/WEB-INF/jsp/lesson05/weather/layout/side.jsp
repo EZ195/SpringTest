@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>side</title>
+<title>sideBar</title>
 </head>
 <body>
 	<h1><img src="https://www.kma.go.kr/kma/resources/images/sub/sig2.png"></h1>
