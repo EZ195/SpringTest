@@ -13,7 +13,7 @@ public interface WeatherDAO {
 	
 	public List<Weather> selectWeatherHistoryList();
 	public int insertWeatherInfo(
-			@Param("date") Date date,
+			@Param("date") String date,
 			@Param("weather") String weather,
 			@Param("temperatures") double temperatures,
 			@Param("precipitation") double precipitaion,

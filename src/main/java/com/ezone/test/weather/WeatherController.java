@@ -41,7 +41,7 @@ public class WeatherController {
 	@GetMapping("/insertWeather")
 	public String insertWeather(
 			@DateTimeFormat(pattern="yyyy-mm-dd") //패턴을 스프링프레임워크가 알 수 있도록 잡아줘야함
-			@RequestParam("date") Date date,
+			@RequestParam("date") String date,
 			@RequestParam("weather") String weather,
 			@RequestParam("temperatures") double temperatures,
 			@RequestParam("precipitation") double precipitation,
