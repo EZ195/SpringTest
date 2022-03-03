@@ -1,4 +1,4 @@
-package com.ezone.test.final01.model;
+package com.ezone.test.weather.model;
 
 import java.util.Date;
 

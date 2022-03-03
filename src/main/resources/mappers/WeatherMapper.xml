@@ -3,8 +3,8 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.ezone.test.final01.dao.WeatherDAO">
-	<select id="selectWeatherHistoryList" resultType="com.ezone.test.final01.model.Weather">
+<mapper namespace="com.ezone.test.weather.dao.WeatherDAO">
+	<select id="selectWeatherHistoryList" resultType="com.ezone.test.weather.model.Weather">
 		SELECT
 			`date`
 			,`weather`
@@ -16,7 +16,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			`weatherhistory`
 	</select>
 	
-	<insert id="insertWeatherData">
+	<insert id="insertWeatherInfo" parameterType="map" >
 		INSERT INTO `weatherhistory`
 					(
 						`date`
@@ -28,19 +28,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 						,`createdAt`
 						,`updatedAt`
 					)
-		VALUE (
-				`#{date}`
-				,`#{weather}`
-				,`#{temperatures}`
-				,`#{precipitation}`
-				,`#{microDust}`
-				,`#{windSpeed}`
-				,now()
-				,now()
-		
-		
-				)
-					
-	
+		VALUE 
+		(
+			#{date}
+			,#{weather}
+			,#{temperatures}
+			,#{precipitation}
+			,#{microDust}
+			,#{windSpeed}
+			,now()
+			,now()
+		)
 	</insert>
 </mapper>
