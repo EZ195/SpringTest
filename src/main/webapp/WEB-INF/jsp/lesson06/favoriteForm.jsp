@@ -9,17 +9,29 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
 </head>
 <body>
+
+<style>
+	#duplication {
+		display:none;
+	}
+	#notDuplication {
+		display:none;
+	}
+</style>
 	
 	<div class="container">
 	<h1>즐겨찾기 추가하기</h1>
+	
 	<label>제목</label><br>
 		<input type="text" class="form-control" name="name" id="nameInput"><br>
 	<label>주소</label><br>
-		<input type="text" class="form-control" name="url" id="urlInput">
-		
+		<input type="text" class="form-control" name="url" id="urlInput"><button type="button" id=duplicate>중복확인</button><br>
+	
+	<div id="duplication"><small class="text-danger">중복된 url 입니다.</small></div>
+	<div id="notDuplication"><small class="text-primary">저장 가능한 url 입니다.</small></div>
+	
 	<button type="button" class="btn btn-info btn block" id="addBtn">추가</button>
 	</div>
 	<script>
@@ -31,12 +43,13 @@
 				let name = $("#nameInput").val();
 				let url = $("#urlInput").val();
 				let https = url.includes('https://') == false;
-				alert(name + " " + url);
+				let http = url.startsWith('http://') == false;
 				
 				//유효성 기능
+				
 				if(name == "") {
 					alert("제목을 입력하세요!!!")
-					return;
+					return; // 중간의 코드 중단하기 위해
 				}
 				
 				if(url == "") {
@@ -44,23 +57,56 @@
 					return;
 				}
 				
-				if(https) {
+				if(https && http) {
 					alert("주소를 확인해주세요!!!")
 					return;
 				}
 				
+				// ajax를 통한 api호출
 				
 				$.ajax({
 					type:"post",
 					url:"/lesson06/addFavorite",
-					data:{"name":name,"url":url},
-					
+					data:{"name":name, "url":url},
+				
+					// 성공여부에 따른 기능 분기
 					success:function(data) {
-						if (data == "success") {
+						if (data.result == "success") {
 							location.href = "/lesson06/favoriteList";							
 						}
-						else if (data == "fail") {
-							alert("확인부탁");
+						else {
+							alert("즐겨찾기 추가 실패ㅠ");
+						}
+							
+					},
+					error:function() {
+						alert("입력에러") //입력에러 출력시 검사 통해서 확인  404 -> 경로 에러 /405 -> 메소드 에러 api에러 / 400 -> 파라미터 오류 / 500 -> 서버 측에 만들어둔 것 컨트롤러 비오 등등에 에러
+						
+						
+					}
+						
+				});
+			});
+			
+			$("#duplicate").on("click" , function(){
+				
+				let url = $("#urlInput").val();
+				
+				$.ajax({
+					type:"get",
+					url:"/lesson06/duplicate",
+					data:{"url":url},
+
+					success:function(data) {
+						
+						$("#duplication").hide();
+						$("#notDuplication").hide();
+						
+						if (data.is_duplicate) {
+							$("#duplication").show();			
+						}
+						else {
+							$("#notDuplication").show();
 						}
 							
 					},
@@ -69,6 +115,8 @@
 					}
 						
 				});
+				
+				
 			});
 		});
 	</script>

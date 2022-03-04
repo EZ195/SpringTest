@@ -22,5 +22,15 @@ public class FavoriteBO {
 		
 		return favoriteDao.addFavorite(favorite);
 	}
+	
+	public boolean isDuplicate(String url) {
+		
+		int count = favoriteDao.isDuplicate(url);
+		
+		if (count == 0) {
+			return false;
+		}
+		else {return true;}
+	}
 
 }
