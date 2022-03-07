@@ -1,0 +1,32 @@
+#wrap {
+    width:1200px;
+}
+
+header {
+    height:100px;
+}
+
+.main-menu {
+    height:40px;
+    background-color: peru;
+}
+
+
+.contents > .content2 {
+    height:300px;
+}
+
+.reservation {
+    width:400px;
+    background-color: sienna;
+}
+
+.reservation-confirm {
+    width:500px;
+    background-color: chocolate;
+}
+
+.reservation-call {
+    width: 300px;
+    background-color: sienna;
+}

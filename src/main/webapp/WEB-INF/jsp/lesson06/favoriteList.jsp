@@ -15,20 +15,59 @@
 	
 	<h1>즐겨찾기 목록</h1>
 	<div class="container">
-	<table border="1" class="table">
+	<table class="table">
 		<tr>
 			<td>No.</td>
 			<td>이름</td>
 			<td>주소</td>
+			<td></td>
 		</tr>
-		<c:forEach var="list" items="${favorite }">
+		<c:forEach var="list" items="${favorite }" varStatus="status">
 		<tr>
-			<td>${list.id }</td>
+			<td>${status.count }</td>
 			<td>${list.name }</td>
-			<td>${list.url } <button class="deleteBtn" type="button">삭제</button></td>
+			<td>${list.url }</td>			
+			<td><button class="deleteBtn btn btn-danger btn-sm" type="button" data-id="${list.id }">삭제</button></td>
+			<%--data-id="${list.id }" data를 꼭 넣고 대문자는 X -와 소문자로 변수명 구성 권장 id를 ajax로 활용하기 위해 사용 --%>
 		</tr>
 		</c:forEach>
 	</table>
 	</div>
+	
+	<script>
+		$(document).ready(function(){
+			$(".deleteBtn").on("click" , function(){
+				
+				// 지금 현재 발생한 이벤트를 가져오는 방법 this 키워드를 사용
+				// data 속성을 꺼내쓰는 데이터 문법도 data() 괄호 안에 - 뒤의 이름 가져오면 됨
+				let favoriteId = $(this).data("id");				
+				
+				$.ajax({
+					type:"get",
+					url:"/lesson06/deleteList",
+					data:{"id":favoriteId},
+					success:function(data) {
+						
+						if(data.result == "success") {
+							
+							alert("삭제되었습니다.")
+							//새로고침
+							location.reload();
+							
+						}
+						else {
+							alert("삭제 실패")
+						}
+							
+						
+					},
+					error:function(){
+						alert("삭제에러");
+					}
+					
+				});
+			});
+		});
+	</script>
 </body>
 </html>

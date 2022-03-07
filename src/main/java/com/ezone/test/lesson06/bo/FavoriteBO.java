@@ -32,5 +32,10 @@ public class FavoriteBO {
 		}
 		else {return true;}
 	}
+	
+	public int deleteList(int id) {
+		
+		return favoriteDao.deleteList(id);
+	}
 
 }

@@ -23,11 +23,14 @@
 	
 	<div class="container">
 	<h1>즐겨찾기 추가하기</h1>
-	
+	<div>
 	<label>제목</label><br>
 		<input type="text" class="form-control" name="name" id="nameInput"><br>
+	</div>
+	<div>
 	<label>주소</label><br>
 		<input type="text" class="form-control" name="url" id="urlInput"><button type="button" id=duplicate>중복확인</button><br>
+	</div>
 	
 	<div id="duplication"><small class="text-danger">중복된 url 입니다.</small></div>
 	<div id="notDuplication"><small class="text-primary">저장 가능한 url 입니다.</small></div>
@@ -37,6 +40,73 @@
 	<script>
 	
 		$(document).ready(function(){
+			
+			// 중복체클르 했는지 여부 저장하는 변수
+			var isChecked = false;
+			
+			// 중ㅈ복된 상태인지 확인하는 변수
+			var isDuplicate = true;
+			
+			// url 입력내용 수정
+			$("#urlInput").on("input" , function() {
+				
+				// 중복관련 변수 값 초기화
+				isChecked = false;
+				isDuplicate = true;
+				
+				// 중복 관련 텍스트 숨기기
+				$("#duplication").hide();
+				$("#notDuplication").hide();
+				
+			});
+			
+			$("#duplicate").on("click" , function(){
+				
+				let url = $("#urlInput").val();
+				let https = url.includes('https://') == false;
+				let http = url.startsWith('http://') == false;
+				
+				if(url == "") {
+					alert("주소를 입력하세요!!!")
+					return;
+				}
+				
+				if(https && http) {
+					alert("주소를 확인해주세요!!!")
+					return;
+				}
+				
+				$.ajax({
+					type:"post",
+					url:"/lesson06/duplicate",
+					data:{"url":url},
+
+					success:function(data) {
+						
+						// 중복 체크 확인
+						isChecked = true;
+						
+						//
+						$("#duplication").hide();
+						$("#notDuplication").hide();
+						
+						if (data.is_duplicate) {
+							$("#duplication").show();	
+						}
+						else {
+							isDuplicate - false;
+							$("#notDuplication").show();
+						}
+							
+					},
+					error:function() {
+						alert("입력에러")
+					}
+						
+				});
+				
+				
+			});
 	
 			$("#addBtn").on("click" , function(){
 				
@@ -59,6 +129,19 @@
 				
 				if(https && http) {
 					alert("주소를 확인해주세요!!!")
+					return;
+				}
+				
+				// 중복 체크 확인 여부
+				
+				if(isChecked == false) {
+					
+					alert("중복 확인을 진행해 주세요");
+					return ;
+				}
+				
+				if(isDuplicate == true){
+					alert("url이 중복되었습니다.");
 					return;
 				}
 				
@@ -86,37 +169,6 @@
 					}
 						
 				});
-			});
-			
-			$("#duplicate").on("click" , function(){
-				
-				let url = $("#urlInput").val();
-				
-				$.ajax({
-					type:"get",
-					url:"/lesson06/duplicate",
-					data:{"url":url},
-
-					success:function(data) {
-						
-						$("#duplication").hide();
-						$("#notDuplication").hide();
-						
-						if (data.is_duplicate) {
-							$("#duplication").show();			
-						}
-						else {
-							$("#notDuplication").show();
-						}
-							
-					},
-					error:function() {
-						alert("입력에러")
-					}
-						
-				});
-				
-				
 			});
 		});
 	</script>

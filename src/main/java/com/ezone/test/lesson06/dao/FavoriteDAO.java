@@ -13,4 +13,5 @@ public interface FavoriteDAO {
 	public List<Favorite> getFavoriteList();
 	public int addFavorite(Favorite favorite);
 	public int isDuplicate(@Param("url") String url);
+	public int deleteList(@Param("id") int id);
 }

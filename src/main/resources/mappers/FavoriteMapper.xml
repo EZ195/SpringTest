@@ -33,7 +33,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM
 			`favorite`
 	</select>
-	<select id="isDuplicate" parameterType="String" resultType="int">
+	<select id="isDuplicate" parameterType="string" resultType="int">
 		SELECT
 				count(*)
 		FROM
@@ -41,5 +41,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE
 				url = #{url}
 	</select>
+	
+	<delete id="deleteList" parameterType="int">
+		DELETE FROM
+				`favorite`
+		WHERE
+				`id` = #{id}
+	
+	</delete>
 
 </mapper>
