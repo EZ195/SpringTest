@@ -11,7 +11,8 @@ import com.ezone.test.lesson06.model.Favorite;
 @Service
 public class FavoriteBO {
 	
-	@Autowired FavoriteDAO favoriteDao;
+	@Autowired 
+	private FavoriteDAO favoriteDao;
 	
 	public List<Favorite> getFavoriteList() {
 		return favoriteDao.getFavoriteList();

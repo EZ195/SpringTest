@@ -21,7 +21,8 @@ import com.ezone.test.lesson06.model.Favorite;
 @RequestMapping("/lesson06")
 public class FavoriteController {
 
-	@Autowired FavoriteBO favoriteBo;
+	@Autowired 
+	private FavoriteBO favoriteBo;
 	
 	@GetMapping("/favoriteList")
 	public String getFavoriteList(Model model) {

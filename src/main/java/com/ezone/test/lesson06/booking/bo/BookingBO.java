@@ -11,10 +11,19 @@ import com.ezone.test.lesson06.booking.model.Booking;
 @Service
 public class BookingBO {
 	
-	@Autowired BookingDAO bookingDao;
+	@Autowired 
+	private BookingDAO bookingDao;
 	
 	public List<Booking> getList(){
 		return bookingDao.getList();
+	}
+	
+	public int addBooking(Booking booking) {
+		return bookingDao.addBooking(booking);
+	}
+	
+	public int deleteBooking(int id) {
+		return bookingDao.deleteBooking(id);
 	}
 
 }

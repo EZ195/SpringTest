@@ -2,12 +2,15 @@ package com.ezone.test.lesson06.booking.model;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class Booking {
 	
 	private int id;
 	private String name;
 	private String headcount;
 	private int day;
+	@DateTimeFormat(pattern="yyyy-mm-dd")
 	private Date date;
 	private String phoneNumber;
 	private String state;
