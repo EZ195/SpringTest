@@ -15,23 +15,22 @@
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
 
-    <link rel="stylesheet" href="style.css" type="text/css">
+    <link rel="stylesheet" href="/lesson06/booking/css/style.css" type="text/css">
 </head>
 <body>
 
 	<div id="wrap">
-		<header>
-        	<div class="text-center display-4">통나무 팬션</div>
+		<header class="mt-4">
+       		<div class="text-center display-4">통나무 팬션</div>
 		</header>
-		<nav class="main-menu">
-                <ul class="nav nav-fill">
-                    <li class="nav-item"> <a class="nav-link text-white" href="#">팬션소개</a></li>
-                    <li class="nav-item"> <a class="nav-link text-white" href="#">객실보기</a></li>
-                    <li class="nav-item"> <a class="nav-link text-white" href="#">예약안내</a></li>
-                    <li class="nav-item"> <a class="nav-link text-white" href="#">커뮤니티</a></li>
-                </ul>
-		</nav>
-
+			<nav class="main-menu">
+	        	<ul class="nav nav-fill">
+	            	<li class="nav-item"> <a class="nav-link text-white" href="#">팬션소개</a></li>
+	            	<li class="nav-item"> <a class="nav-link text-white" href="#">객실보기</a></li>
+	            	<li class="nav-item"> <a class="nav-link text-white" href="/booking/bookingForm">예약하기</a></li>
+	            	<li class="nav-item"> <a class="nav-link text-white" href="/booking/getList">예약리스트</a></li>
+	        	</ul>
+			</nav>
 		<div class="container">
 			<h1>에약목록보기</h1>
 			<table class="table">
@@ -72,16 +71,17 @@
 				</c:forEach>
 			</table>
 		</div>
-		<footer >
-	    	제주특별자치도 제주시 애월읍  <br>
-	        사업자등록번호: 111-22-255222 / 농어촌민박사업자지정 / 대표:김통목 <br>
-	        Copyright 2025 tongnamu All right reserved
+		<footer class="mt-3 ml-4">
+			<address>
+		    	제주특별자치도 제주시 애월읍  <br>
+		        사업자등록번호: 111-22-255222 / 농어촌민박사업자지정 / 대표:김통목 <br>
+		        Copyright 2025 tongnamu All right reserved
+	        </address>
 		</footer>
 	</div>
-	
 	<script>
 		$(document).ready(function(){
-			$("#deleteBtn").on("click" , function(){
+			$(".deleteBtn").on("click" , function(){
 				
 				let deleteId = $(this).data("id");
 				

@@ -21,7 +21,7 @@ import com.ezone.test.lesson06.booking.model.Booking;
 @RequestMapping("/booking")
 public class BookingController {
 	
-	@Autowired 
+	@Autowired
 	private BookingBO bookingBo;
 	
 	@GetMapping("/main")
@@ -69,7 +69,7 @@ public class BookingController {
 		
 		int count = bookingBo.deleteBooking(id);
 		
-		Map<String, String> result = new HashMap<String,String>();
+		Map<String, String> result = new HashMap<>();
 		
 		if (count == 1) {
 			result.put("result", "success");
