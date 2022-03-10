@@ -30,6 +30,32 @@ public class BookingController {
 		return "lesson06/booking/main";
 	}
 	
+	@GetMapping("/saerchBooking")
+	@ResponseBody
+	public Map<String, Object> searchBooking(@RequestParam("name") String name,
+								@RequestParam("phoneNumber") String phoneNumber) {
+		
+		// booking으로 리턴타입을 잡고 객체로 만들어주면 알아서 제이슨 형태로 출력해줌
+		Booking booking = bookingBo.getBooking(name, phoneNumber);
+		
+		// Map<String, Object> result = new HashMap<>();
+		// result.put(phoneNumber, result);
+		
+		// json형태 데이터 만들기
+		// {"name":"장나라","phoneNumber":"010-2222-0000", "date":"2022-03-10","day":4}
+		
+		Map<String, Object> result = new HashMap<>();
+		if(booking != null) {
+			result.put("result","success");
+			result.put("booking", booking);
+		}
+		else {
+			result.put("result", "fail");
+		}
+		return result;
+		
+	}
+	
 	@GetMapping("/getList")
 	public String getList(Model model) {
 		
@@ -76,6 +102,21 @@ public class BookingController {
 		}
 		else {
 			result.put("result", "fail");
+		}
+		return result;
+	}
+	@ResponseBody
+	@GetMapping("/changeState")
+	public Map<String, String> changeState(@RequestParam("id") int id) {
+		
+		int count = bookingBo.changeState(id);
+		Map<String, String> result = new HashMap<>();
+		
+		if(count == 1) {
+			result.put("result", "success");
+		}
+		else {
+			result.put("result", "fall");
 		}
 		return result;
 	}

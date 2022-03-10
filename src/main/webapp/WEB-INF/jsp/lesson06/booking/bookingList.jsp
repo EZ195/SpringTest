@@ -56,7 +56,7 @@
 								<td class="text-success">${list.state }</td>								
 							</c:when>
 							<c:when test="${list.state eq '대기중'}">
-								<td class="text-info">${list.state }</td>								
+								<td ><a href="#" class="text-info penddingBtn" data-booking-id="${booking.id}">${list.state }</a></td>								
 							</c:when>
 							<c:when test="${list.state eq '취소'}">
 								<td class="text-danger">${list.state }</td>							
@@ -81,6 +81,30 @@
 	</div>
 	<script>
 		$(document).ready(function(){
+			
+			$(".penddingBtn").on("click",function(){
+				
+				$(this).data("booking-id");
+				$.ajax({
+					type:"get",
+					url:"/booking/changeState",
+					data:{"id":bookingId},
+					success:function(data) {
+						if(data.result == "success") {
+							location.reload();
+						}
+						else {
+							alert("상태변경 실패");
+						}
+					},
+					error:function(data) {
+						alert("에러");
+					}
+					
+				});
+				
+			});
+			
 			$(".deleteBtn").on("click" , function(){
 				
 				let deleteId = $(this).data("id");
@@ -101,7 +125,6 @@
 					error:function(){
 						alert("삭제 에러");
 					}
-					
 				});
 			});
 		});

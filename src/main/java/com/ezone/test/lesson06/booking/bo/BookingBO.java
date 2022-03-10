@@ -19,11 +19,22 @@ public class BookingBO {
 	}
 	
 	public int addBooking(Booking booking) {
+		
+		booking.setState("대기중");
 		return bookingDao.addBooking(booking);
 	}
 	
 	public int deleteBooking(int id) {
 		return bookingDao.deleteBooking(id);
+	}
+	
+	public Booking getBooking(String name, String phoneNumber) {
+		return bookingDao.getBooking(name, phoneNumber);
+	}
+	
+	public int changeState(int id) {
+		return bookingDao.updateState(id);
+		
 	}
 
 }

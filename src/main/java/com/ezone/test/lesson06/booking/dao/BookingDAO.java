@@ -13,5 +13,7 @@ public interface BookingDAO {
 	public List<Booking> getList();
 	public int addBooking(Booking booking);
 	public int deleteBooking(@Param("id") int id);
+	public Booking getBooking(@Param("name") String name,@Param("phoneNumber") String phoneNumber);
+	public int updateState(@Param("id") int id);
 
 }

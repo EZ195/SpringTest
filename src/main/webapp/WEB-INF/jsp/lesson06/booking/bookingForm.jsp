@@ -33,13 +33,13 @@
 				<label>이름</label>
 				<input type="text" name="name" id="nameInput"><br>
 				<label>예약날짜</label>
-				<input type="date" name="date" id="dateInput"><br>
+				<input type="text" name="date" id="dateInput"><br>
 				<label>숙박일수</label>
 				<input type="text" name="day" id="dayInput"><br>
 				<label>숙박인원</label>
 				<input type="text" name="headcount" id="headcountInput"><br>
 				<label>전화번호</label>
-				<input type="text" name="phoneNumber" id="phoneNumber"><br>
+				<input type="text" name="phoneNumber" id="phoneNumberInput"><br>
 				<button type="button" id="addBtn">추가</button>
 		</div>
 	<footer class="mt-3 ml-4">
@@ -54,6 +54,13 @@
 	<script>
 	
 		$(document).ready(function(){
+			
+			// datepicker 사용해서 데이터 입력
+			$("#dateInput").datepicker({
+				dateFormat:"yy-mm-dd",
+				minDate:0
+			});
+			
 			$("#addBtn").on("click" , function(){
 				
 				let name = $("#nameInput").val();
@@ -62,16 +69,11 @@
 				let headcount = $("#headcountInput").val();
 				let phoneNumber = $("#phoneNumberInput").val();
 				
-				
-				var year = date.getFullYear;
-				var month = date.getMonth;
-				var dateDay = date.getDate;
-				
 				if (name == "") {
 					alert("예약자 이름을 입력해주세요");
 					return;
 				}
-				if (isNaN(year) || isNaN(month) || isNaN(dateDay)) {
+				if (date == "") {
 					alert("예약날짜를 입력해주세요");
 					return;
 				}
@@ -79,10 +81,25 @@
 					alert("숙박일수를 입력해주세요");
 					return;
 				}
+				
+				// 숫자가 아닌 것을 입력한 경우 // isNaN() : 숫자가 아닌 것이 포함되면 트루값 출력
+				if (isNaN(day)) {
+					alert("숙박일수는 숫자만 입력 가능합니다.");
+					return;
+				} 
+				
 				if (headcount == "") {
 					alert("인원수를 입력해주세요");
 					return;
 				}
+				
+				// 숫자 골라내기
+				
+				if (isNaN(headcount)) {
+					alert("인원수는 숫자만 입력이 가능합니다.");
+					return;
+				}
+				
 				if (phoneNumber == "") {
 					alert("전화번호를 입력해주세요");
 					return;
@@ -94,7 +111,6 @@
 					data:{"name":name, "date":date,"day":day,"headcount":headcount,"phoneNumber":phoneNumber},
 					success:function(data) {
 						if(data.result == "success") {
-							
 							alert("등록되었습니다.");
 							location.href = "/booking/getList";
 						}

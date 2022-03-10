@@ -26,6 +26,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				,`day`
 				,`date`
 				,`phoneNumber`
+				,`state`
 				,`createdAt`				
 				,`updatedAt`				
 			)
@@ -38,6 +39,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				,#{day}
 				,#{date}
 				,#{phoneNumber}
+				,#{state}
 				,now()
 				,now()
 			)
@@ -49,5 +51,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     	WHERE
         		`id` = #{id}
 	</delete>
+	<select id="getbooking" parameterType="map" resultType="com.ezone.test.lesson06.booking.model.Booking">
+		SELECT
+				`name`
+				,`headcount`
+				,`day`
+				,`date`
+				,`phoneNumber`
+				,`state`
+		FROM
+				`booking`
+		WHERE
+				`name` = #{name}
+				AND `phoneNumber` = #{phoneNumber}
+	</select>
+	<update id="updateState" parameterType="int">
+		UPDATE
+				`booking`
+		SET
+				`state` = '확정'
+		WHERE
+				`id` = #{id}
+	</update>
 
 </mapper>
