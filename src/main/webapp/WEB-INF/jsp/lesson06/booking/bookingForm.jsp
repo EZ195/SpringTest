@@ -62,6 +62,32 @@
 				let headcount = $("#headcountInput").val();
 				let phoneNumber = $("#phoneNumberInput").val();
 				
+				
+				var year = date.getFullYear;
+				var month = date.getMonth;
+				var dateDay = date.getDate;
+				
+				if (name == "") {
+					alert("예약자 이름을 입력해주세요");
+					return;
+				}
+				if (isNaN(year) || isNaN(month) || isNaN(dateDay)) {
+					alert("예약날짜를 입력해주세요");
+					return;
+				}
+				if (day == "") {
+					alert("숙박일수를 입력해주세요");
+					return;
+				}
+				if (headcount == "") {
+					alert("인원수를 입력해주세요");
+					return;
+				}
+				if (phoneNumber == "") {
+					alert("전화번호를 입력해주세요");
+					return;
+				}
+				
 				$.ajax({
 					type:"post",
 					url:"/booking/addBooking",
