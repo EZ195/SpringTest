@@ -41,10 +41,10 @@
 	
 		$(document).ready(function(){
 			
-			// 중복체클르 했는지 여부 저장하는 변수
+			// 중복체크를 했는지 여부 저장하는 변수
 			var isChecked = false;
 			
-			// 중ㅈ복된 상태인지 확인하는 변수
+			// 중복된 상태인지 확인하는 변수
 			var isDuplicate = true;
 			
 			// url 입력내용 수정
@@ -94,7 +94,7 @@
 							$("#duplication").show();	
 						}
 						else {
-							isDuplicate - false;
+							isDuplicate = false;
 							$("#notDuplication").show();
 						}
 							
