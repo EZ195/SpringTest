@@ -38,9 +38,10 @@
 			`real_estate`
 		WHERE
 			<![CDATA[ `rentPrice` < #{rentPrice} ]]>
-				<!-- xml에서 부등호 사용방법 
+				<!-- 
+				xml에서 부등호 사용방법 :
 				<![CDATA[ 원하는 수식 ]]>
-			-->	
+				-->	
 	</select>
 	
 	<select id="selectRealEstateByAreaPrice" resultType="com.ezone.test.lesson03.model.RealEstate"

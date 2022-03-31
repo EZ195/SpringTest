@@ -18,7 +18,7 @@ public class StoreController {
 	
 	@RequestMapping("/lesson02/test01")
 	@ResponseBody
-	public List<Store>storeView() {
+	public List<Store> storeView() {
 		List<Store> storeList = storeBO.getStoreList();
 		
 		return storeList;
